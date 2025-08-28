@@ -164,4 +164,77 @@ public final class AssistedInjectionAnnotationsTest {
     assertThat(logOutput).isEmpty();
   }
 
+  @Test
+  public void assistedFactoryMethod_duplicateMethodsWithWorkaroundDisabled_throwsException() {
+    // Set system property to disable workaround
+    System.setProperty("dagger.ksp.workaround.disabled", "true");
+    try {
+      // Create mock factory and method elements
+      XTypeElement mockFactory = mock(XTypeElement.class);
+      when(mockFactory.getQualifiedName()).thenReturn("com.example.TestFactory");
+
+      XMethodElement mockMethod1 = mock(XMethodElement.class);
+      XMethodElement mockMethod2 = mock(XMethodElement.class);
+      
+      when(mockMethod1.getJvmName()).thenReturn("create");
+      when(mockMethod2.getJvmName()).thenReturn("create");
+      
+      ImmutableList<XMethodElement> duplicateMethodsList = ImmutableList.of(mockMethod1, mockMethod2);
+      
+      // Mock XTypeElements.getAllNonPrivateInstanceMethods to return duplicates
+      mockedXTypeElements.when(() -> XTypeElements.getAllNonPrivateInstanceMethods(mockFactory))
+          .thenReturn(duplicateMethodsList);
+      
+      // Mock the methods to be abstract and non-default
+      when(mockMethod1.isAbstract()).thenReturn(true);
+      when(mockMethod2.isAbstract()).thenReturn(true);
+      when(mockMethod1.isJavaDefault()).thenReturn(false);
+      when(mockMethod2.isJavaDefault()).thenReturn(false);
+
+      // Should throw IllegalArgumentException when workaround is disabled
+      IllegalArgumentException exception = assertThrows(
+          IllegalArgumentException.class, 
+          () -> assistedFactoryMethod(mockFactory));
+          
+      assertThat(exception.getMessage()).contains("Factory com.example.TestFactory has 2 assisted factory methods but expected exactly 1");
+      assertThat(exception.getMessage()).contains("KSP workaround is disabled via dagger.ksp.workaround.disabled=true");
+      
+      // Verify no diagnostic logging occurred when workaround is disabled
+      String logOutput = errorOutput.toString();
+      assertThat(logOutput).doesNotContain("=== KSP INCREMENTAL PROCESSING BUG DETECTED ===");
+    } finally {
+      // Clean up system property
+      System.clearProperty("dagger.ksp.workaround.disabled");
+    }
+  }
+
+  @Test
+  public void assistedFactoryMethod_noMethodsWithWorkaroundDisabled_throwsException() {
+    // Set system property to disable workaround
+    System.setProperty("dagger.ksp.workaround.disabled", "true");
+    try {
+      XTypeElement mockFactory = mock(XTypeElement.class);
+      when(mockFactory.getQualifiedName()).thenReturn("com.example.EmptyFactory");
+
+      // Mock XTypeElements.getAllNonPrivateInstanceMethods to return empty list
+      mockedXTypeElements.when(() -> XTypeElements.getAllNonPrivateInstanceMethods(mockFactory))
+          .thenReturn(ImmutableList.of());
+
+      // Should throw IllegalArgumentException for empty methods even with workaround disabled
+      IllegalArgumentException exception = assertThrows(
+          IllegalArgumentException.class, 
+          () -> assistedFactoryMethod(mockFactory));
+          
+      assertThat(exception.getMessage()).contains("Factory com.example.EmptyFactory has no assisted factory methods");
+      assertThat(exception.getMessage()).contains("This should have been caught during validation");
+      
+      // Verify no diagnostic logging occurred when workaround is disabled
+      String logOutput = errorOutput.toString();
+      assertThat(logOutput).doesNotContain("=== KSP INCREMENTAL PROCESSING BUG DETECTED ===");
+    } finally {
+      // Clean up system property
+      System.clearProperty("dagger.ksp.workaround.disabled");
+    }
+  }
+
 }

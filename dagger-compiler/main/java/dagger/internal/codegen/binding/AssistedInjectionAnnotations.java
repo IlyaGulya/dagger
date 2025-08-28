@@ -54,6 +54,15 @@ import java.util.Optional;
 
 /** Assisted injection utility methods. */
 public final class AssistedInjectionAnnotations {
+  
+  /**
+   * System property to control KSP duplicate method workaround.
+   * When set to "true", disables the workaround for KSP duplicate method elements.
+   * Default is "false" (workaround enabled).
+   */
+  private static boolean isKspWorkaroundDisabled() {
+    return Boolean.parseBoolean(System.getProperty("dagger.ksp.workaround.disabled", "false"));
+  }
   /** Returns the factory method for the given factory {@link XTypeElement}. */
   public static XMethodElement assistedFactoryMethod(XTypeElement factory) {
     ImmutableSet<XMethodElement> methods = assistedFactoryMethods(factory);
@@ -61,17 +70,32 @@ public final class AssistedInjectionAnnotations {
     // Defensive handling for KSP incremental processing bug (issues #4054, #4063)
     // where getAllNonPrivateInstanceMethods may return duplicate method elements
     if (methods.size() != 1) {
-      logDuplicateMethodDiagnostics(factory, methods);
+      if (!isKspWorkaroundDisabled()) {
+        logDuplicateMethodDiagnostics(factory, methods);
 
-      if (methods.isEmpty()) {
-        throw new IllegalArgumentException(
-            "Factory " + factory.getQualifiedName() + " has no assisted factory methods. "
-            + "This should have been caught during validation.");
+        if (methods.isEmpty()) {
+          throw new IllegalArgumentException(
+              "Factory " + factory.getQualifiedName() + " has no assisted factory methods. "
+              + "This should have been caught during validation.");
+        }
+
+        // Recovery: return the first method (Set iteration is deterministic)
+        // This works because validation already confirmed there should be exactly one method
+        return methods.iterator().next();
+      } else {
+        // Workaround disabled - throw exception for any count != 1
+        if (methods.isEmpty()) {
+          throw new IllegalArgumentException(
+              "Factory " + factory.getQualifiedName() + " has no assisted factory methods. "
+              + "This should have been caught during validation.");
+        } else {
+          throw new IllegalArgumentException(
+              "Factory " + factory.getQualifiedName() + " has " + methods.size() 
+              + " assisted factory methods but expected exactly 1. "
+              + "KSP workaround is disabled via dagger.ksp.workaround.disabled=true. "
+              + "This should have been caught during validation.");
+        }
       }
-
-      // Recovery: return the first method (Set iteration is deterministic)
-      // This works because validation already confirmed there should be exactly one method
-      return methods.iterator().next();
     }
 
     return getOnlyElement(methods);
