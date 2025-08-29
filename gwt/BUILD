@@ -26,7 +26,7 @@ java_library(
     javacopts = JAVA_RELEASE_MIN,
     resource_strip_prefix = "gwt/",
     resources = glob(["**/*.gwt.xml"]),
-    tags = ["maven_coordinates=me.gulya:dagger-gwt:" + POM_VERSION],
+    tags = ["maven_coordinates=me.gulya.dagger:dagger-gwt:" + POM_VERSION],
     exports = [
         ":manual_deps",
         "//dagger-runtime/main/java/dagger:core",

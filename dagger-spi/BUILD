@@ -28,7 +28,7 @@ package_group(
     ],
 )
 
-ARTIFACT_COORDINATES = "me.gulya:dagger-spi:" + POM_VERSION
+ARTIFACT_COORDINATES = "me.gulya.dagger:dagger-spi:" + POM_VERSION
 
 ARTIFACT_LIBS = [
     "//dagger-spi/main/java/dagger/internal/codegen/extension",
