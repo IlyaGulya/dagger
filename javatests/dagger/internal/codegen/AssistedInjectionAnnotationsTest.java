@@ -27,8 +27,9 @@ import androidx.room.compiler.processing.XTypeElement;
 import com.google.common.collect.ImmutableList;
 import dagger.internal.codegen.binding.AssistedInjectionAnnotations;
 import dagger.internal.codegen.xprocessing.XTypeElements;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
+import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -41,23 +42,31 @@ import org.mockito.Mockito;
 public final class AssistedInjectionAnnotationsTest {
 
   private MockedStatic<XTypeElements> mockedXTypeElements;
-  private ByteArrayOutputStream errorOutput;
-  private PrintStream originalErr;
+  private TestLogHandler testLogHandler;
+  private Logger logger;
 
   @Before
   public void setUp() {
     mockedXTypeElements = Mockito.mockStatic(XTypeElements.class);
     
-    // Capture System.err output to verify logging
-    errorOutput = new ByteArrayOutputStream();
-    originalErr = System.err;
-    System.setErr(new PrintStream(errorOutput));
+    
+    // Set up logger capture
+    logger = Logger.getLogger("dagger.internal.codegen.binding.AssistedInjectionAnnotations");
+    testLogHandler = new TestLogHandler();
+    logger.addHandler(testLogHandler);
+    logger.setUseParentHandlers(false);
+    
+    // Reset logging status for each test
+    AssistedInjectionAnnotations.resetLoggingForTesting();
   }
 
   @After
   public void tearDown() {
     mockedXTypeElements.close();
-    System.setErr(originalErr);
+    if (logger != null && testLogHandler != null) {
+      logger.removeHandler(testLogHandler);
+      logger.setUseParentHandlers(true);
+    }
   }
 
   @Test
@@ -107,15 +116,15 @@ public final class AssistedInjectionAnnotationsTest {
     assertThat(result.getJvmName()).isEqualTo("create");
     
     // Verify comprehensive logging was output
-    String logOutput = errorOutput.toString();
-    System.out.println(logOutput);
-    assertThat(logOutput).contains("Factory: com.example.TestFactory");
-    assertThat(logOutput).contains("Expected: 1 method, Found: 2");
-    assertThat(logOutput).contains("Method #1");
-    assertThat(logOutput).contains("Method #2");
-    assertThat(logOutput).contains("Name: create");
-    assertThat(logOutput).contains("Java Identity Hash:");
-    assertThat(logOutput).contains("equals() with Method #1:");
+    java.util.List<String> logMessages = testLogHandler.getMessages();
+    String combinedLog = String.join("\n", logMessages);
+    assertThat(combinedLog).contains("Factory: com.example.TestFactory");
+    assertThat(combinedLog).contains("Expected: 1 method, Found: 2");
+    assertThat(combinedLog).contains("Method #1");
+    assertThat(combinedLog).contains("Method #2");
+    assertThat(combinedLog).contains("Name: create");
+    assertThat(combinedLog).contains("Java Identity Hash:");
+    assertThat(combinedLog).contains("equals() with Method #1:");
   }
 
   @Test
@@ -136,8 +145,9 @@ public final class AssistedInjectionAnnotationsTest {
     assertThat(exception.getMessage()).contains("This should have been caught during validation");
     
     // Verify error logging
-    String logOutput = errorOutput.toString();
-    assertThat(logOutput).contains("Expected: 1 method, Found: 0");
+    java.util.List<String> logMessages = testLogHandler.getMessages();
+    String combinedLog = String.join("\n", logMessages);
+    assertThat(combinedLog).contains("Expected: 1 method, Found: 0");
   }
 
   @Test  
@@ -154,14 +164,15 @@ public final class AssistedInjectionAnnotationsTest {
     mockedXTypeElements.when(() -> XTypeElements.getAllNonPrivateInstanceMethods(mockFactory))
         .thenReturn(ImmutableList.of(mockMethod));
 
-    // Should work normally without any logging
+    // Should work normally and log the workaround status
     XMethodElement result = assistedFactoryMethod(mockFactory);
     
     assertThat(result).isSameInstanceAs(mockMethod);
     
-    // Verify no error logging occurred
-    String logOutput = errorOutput.toString();
-    assertThat(logOutput).isEmpty();
+    // Verify workaround status was logged
+    java.util.List<String> logMessages = testLogHandler.getMessages();
+    String combinedLog = String.join("\\n", logMessages);
+    assertThat(combinedLog).contains("Dagger KSP workaround status: ENABLED");
   }
 
   @Test
@@ -200,8 +211,9 @@ public final class AssistedInjectionAnnotationsTest {
       assertThat(exception.getMessage()).contains("KSP workaround is disabled via dagger.ksp.workaround.disabled=true");
       
       // Verify no diagnostic logging occurred when workaround is disabled
-      String logOutput = errorOutput.toString();
-      assertThat(logOutput).doesNotContain("=== KSP INCREMENTAL PROCESSING BUG DETECTED ===");
+      java.util.List<String> logMessages = testLogHandler.getMessages();
+      String combinedLog = String.join("\n", logMessages);
+      assertThat(combinedLog).doesNotContain("=== KSP INCREMENTAL PROCESSING BUG DETECTED ===");
     } finally {
       // Clean up system property
       System.clearProperty("dagger.ksp.workaround.disabled");
@@ -229,11 +241,71 @@ public final class AssistedInjectionAnnotationsTest {
       assertThat(exception.getMessage()).contains("This should have been caught during validation");
       
       // Verify no diagnostic logging occurred when workaround is disabled
-      String logOutput = errorOutput.toString();
-      assertThat(logOutput).doesNotContain("=== KSP INCREMENTAL PROCESSING BUG DETECTED ===");
+      java.util.List<String> logMessages = testLogHandler.getMessages();
+      String combinedLog = String.join("\n", logMessages);
+      assertThat(combinedLog).doesNotContain("=== KSP INCREMENTAL PROCESSING BUG DETECTED ===");
     } finally {
       // Clean up system property
       System.clearProperty("dagger.ksp.workaround.disabled");
+    }
+  }
+
+  @Test
+  public void systemPropertyLogging_logsOnlyOnceOnFirstAccess() {
+    // First test with workaround enabled (default)
+    System.clearProperty("dagger.ksp.workaround.disabled");
+    
+    try {
+      // Create a simple single method factory
+      XTypeElement mockFactory = mock(XTypeElement.class);
+      when(mockFactory.getQualifiedName()).thenReturn("com.example.TestFactory");
+      
+      XMethodElement mockMethod = mock(XMethodElement.class);
+      when(mockMethod.getJvmName()).thenReturn("create");
+      when(mockMethod.isAbstract()).thenReturn(true);
+      when(mockMethod.isJavaDefault()).thenReturn(false);
+      
+      ImmutableList<XMethodElement> singleMethodList = ImmutableList.of(mockMethod);
+      
+      mockedXTypeElements.when(() -> XTypeElements.getAllNonPrivateInstanceMethods(mockFactory))
+          .thenReturn(singleMethodList);
+      
+      // First call should log
+      assistedFactoryMethod(mockFactory);
+      assertThat(testLogHandler.getMessages()).contains("Dagger KSP workaround status: ENABLED (dagger.ksp.workaround.disabled=false)");
+      
+      // Clear captured messages
+      testLogHandler.clearMessages();
+      
+      // Second call should not log again
+      assistedFactoryMethod(mockFactory);
+      assertThat(testLogHandler.getMessages()).doesNotContain("Dagger KSP workaround status:");
+      
+    } finally {
+      System.clearProperty("dagger.ksp.workaround.disabled");
+    }
+  }
+
+  private static class TestLogHandler extends Handler {
+    private final java.util.List<String> messages = new java.util.ArrayList<>();
+
+    @Override
+    public void publish(LogRecord record) {
+      messages.add(record.getMessage());
+    }
+
+    @Override
+    public void flush() {}
+
+    @Override
+    public void close() throws SecurityException {}
+
+    public java.util.List<String> getMessages() {
+      return new java.util.ArrayList<>(messages);
+    }
+
+    public void clearMessages() {
+      messages.clear();
     }
   }
 

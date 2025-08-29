@@ -37,6 +37,7 @@ import androidx.room.compiler.processing.XTypeElement;
 import androidx.room.compiler.processing.XVariableElement;
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
@@ -51,20 +52,44 @@ import dagger.internal.codegen.xprocessing.XTypeNames;
 import dagger.internal.codegen.xprocessing.XTypes;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.logging.Logger;
 
 /** Assisted injection utility methods. */
 public final class AssistedInjectionAnnotations {
+
+  private static final Logger logger = Logger.getLogger(AssistedInjectionAnnotations.class.getName());
+
+  @VisibleForTesting
+  private static final AtomicBoolean statusLogged = new AtomicBoolean(false);
   
+  // Test helper method to reset logging status
+  public static void resetLoggingForTesting() {
+    statusLogged.set(false);
+  }
+
   /**
    * System property to control KSP duplicate method workaround.
    * When set to "true", disables the workaround for KSP duplicate method elements.
    * Default is "false" (workaround enabled).
    */
   private static boolean isKspWorkaroundDisabled() {
-    return Boolean.parseBoolean(System.getProperty("dagger.ksp.workaround.disabled", "false"));
+    String propertyValue = System.getProperty("dagger.ksp.workaround.disabled", "false");
+    return Boolean.parseBoolean(propertyValue);
+  }
+  
+  private static void logWorkaroundStatusOnce() {
+    if (statusLogged.compareAndSet(false, true)) {
+      String propertyValue = System.getProperty("dagger.ksp.workaround.disabled", "false");
+      boolean disabled = Boolean.parseBoolean(propertyValue);
+      logger.info("Dagger KSP workaround status: " + 
+          (disabled ? "DISABLED" : "ENABLED") + 
+          " (dagger.ksp.workaround.disabled=" + propertyValue + ")");
+    }
   }
   /** Returns the factory method for the given factory {@link XTypeElement}. */
   public static XMethodElement assistedFactoryMethod(XTypeElement factory) {
+    logWorkaroundStatusOnce();
     ImmutableSet<XMethodElement> methods = assistedFactoryMethods(factory);
 
     // Defensive handling for KSP incremental processing bug (issues #4054, #4063)
@@ -482,7 +507,7 @@ public final class AssistedInjectionAnnotations {
       out.append("ksp.incremental=").append(nz(System.getProperty("ksp.incremental"))).append("\n");
       out.append("\n=== END KSP BUG DIAGNOSTIC ===\n");
 
-      System.err.println(out.toString());
+      logger.severe(out.toString());
     }
 
     // Null-to-string helper for grouping keys & prints.
