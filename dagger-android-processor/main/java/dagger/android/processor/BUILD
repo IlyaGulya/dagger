@@ -51,7 +51,7 @@ java_library(
         exclude = ["BaseProcessingStep.java"],
     ),
     javacopts = DOCLINT_HTML_AND_SYNTAX + DOCLINT_REFERENCES,
-    tags = ["maven_coordinates=com.google.dagger:dagger-android-processor:" + POM_VERSION],
+    tags = ["maven_coordinates=me.gulya.dagger:dagger-android-processor:" + POM_VERSION],
     deps = [
         ":base_processing_step",
         "//dagger-compiler/main/java/dagger/internal/codegen/xprocessing",

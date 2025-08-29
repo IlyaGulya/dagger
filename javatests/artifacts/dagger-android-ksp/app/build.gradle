@@ -70,9 +70,9 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
     // Dagger Android dependencies
-    implementation 'com.google.dagger:dagger:LOCAL-SNAPSHOT'
-    implementation 'com.google.dagger:dagger-android-support:LOCAL-SNAPSHOT'
-    implementation 'com.google.dagger:dagger-android:LOCAL-SNAPSHOT'
-    ksp 'com.google.dagger:dagger-android-processor:LOCAL-SNAPSHOT'
-    ksp "com.google.dagger:dagger-compiler:LOCAL-SNAPSHOT"
+    implementation 'me.gulya.dagger:dagger:LOCAL-SNAPSHOT'
+    implementation 'me.gulya.dagger:dagger-android-support:LOCAL-SNAPSHOT'
+    implementation 'me.gulya.dagger:dagger-android:LOCAL-SNAPSHOT'
+    ksp 'me.gulya.dagger:dagger-android-processor:LOCAL-SNAPSHOT'
+    ksp "me.gulya.dagger:dagger-compiler:LOCAL-SNAPSHOT"
 }

@@ -60,6 +60,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
     // Hilt dependencies
-    implementation "com.google.dagger:hilt-android:$hilt_version"
-    annotationProcessor "com.google.dagger:hilt-compiler:$hilt_version"
+    implementation "me.gulya.dagger:hilt-android:$hilt_version"
+    annotationProcessor "me.gulya.dagger:hilt-compiler:$hilt_version"
 }

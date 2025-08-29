@@ -26,6 +26,6 @@ java {
 
 dependencies {
   implementation project(":transitive-annotation-app:library2")
-  implementation "com.google.dagger:dagger:$dagger_version"
-  annotationProcessor "com.google.dagger:dagger-compiler:$dagger_version"
+  implementation "me.gulya.dagger:dagger:$dagger_version"
+  annotationProcessor "me.gulya.dagger:dagger-compiler:$dagger_version"
 }

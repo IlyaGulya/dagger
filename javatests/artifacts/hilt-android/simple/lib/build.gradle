@@ -24,6 +24,6 @@ java {
 }
 
 dependencies {
-    implementation "com.google.dagger:hilt-core:$dagger_version"
-    annotationProcessor "com.google.dagger:hilt-compiler:$dagger_version"
+    implementation "me.gulya.dagger:hilt-core:$dagger_version"
+    annotationProcessor "me.gulya.dagger:hilt-compiler:$dagger_version"
 }

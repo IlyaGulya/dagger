@@ -29,7 +29,7 @@ java_library(
     name = "core",
     srcs = glob(["**/*.java"]),
     javacopts = JAVA_RELEASE_MIN + DOCLINT_HTML_AND_SYNTAX,
-    tags = ["maven_coordinates=com.google.dagger:dagger:" + POM_VERSION],
+    tags = ["maven_coordinates=me.gulya.dagger:dagger:" + POM_VERSION],
     exports = ["//third_party/java/jsr330_inject"],
     deps = [
         "//third_party/java/jspecify_annotations",

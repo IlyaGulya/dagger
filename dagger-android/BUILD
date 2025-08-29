@@ -28,14 +28,14 @@ package(default_visibility = ["//:src"])
 
 gen_maven_artifact(
     name = "artifact",
-    artifact_coordinates = "com.google.dagger:dagger-android:" + POM_VERSION,
+    artifact_coordinates = "me.gulya.dagger:dagger-android:" + POM_VERSION,
     artifact_name = "Dagger Android",
     artifact_target = "//dagger-android/main/java/dagger/android:android",
     artifact_target_maven_deps = [
         "androidx.annotation:annotation",
         "androidx.annotation:annotation-jvm",
-        "com.google.dagger:dagger",
-        "com.google.dagger:dagger-lint-aar",
+        "me.gulya.dagger:dagger",
+        "me.gulya.dagger:dagger-lint-aar",
     ],
     javadoc_android_api_level = 34,
     javadoc_root_packages = [
@@ -54,7 +54,7 @@ dejetified_library(
 
 android_library(
     name = "legacy-deps",
-    tags = ["maven_coordinates=com.google.dagger:dagger-android-legacy:" + POM_VERSION],
+    tags = ["maven_coordinates=me.gulya.dagger:dagger-android-legacy:" + POM_VERSION],
     exports = [
         "//:dagger_with_compiler",
         "//third_party/java/auto:value",

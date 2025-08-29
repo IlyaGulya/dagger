@@ -32,7 +32,7 @@ java_library(
     plugins = [
         "//dagger-compiler/main/java/dagger/internal/codegen/bootstrap",
     ],
-    tags = ["maven_coordinates=com.google.dagger:dagger-compiler:" + POM_VERSION],
+    tags = ["maven_coordinates=me.gulya.dagger:dagger-compiler:" + POM_VERSION],
     deps = [
         ":package_info",
         "//dagger-compiler/main/java/dagger/internal/codegen/base",

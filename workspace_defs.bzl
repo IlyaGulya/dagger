@@ -25,34 +25,34 @@ load("//:build_defs.bzl", "POM_VERSION")
 _VERSION = POM_VERSION if POM_VERSION != "${project.version}" else "HEAD-SNAPSHOT"
 
 DAGGER_ARTIFACTS = [
-    "com.google.dagger:dagger:" + _VERSION,
-    "com.google.dagger:dagger-compiler:" + _VERSION,
-    "com.google.dagger:dagger-producers:" + _VERSION,
-    "com.google.dagger:dagger-spi:" + _VERSION,
+    "me.gulya.dagger:dagger:" + _VERSION,
+    "me.gulya.dagger:dagger-compiler:" + _VERSION,
+    "me.gulya.dagger:dagger-producers:" + _VERSION,
+    "me.gulya.dagger:dagger-spi:" + _VERSION,
 ]
 
 DAGGER_ANDROID_ARTIFACTS = [
-    "com.google.dagger:dagger-android-processor:" + _VERSION,
-    "com.google.dagger:dagger-android-support:" + _VERSION,
-    "com.google.dagger:dagger-android:" + _VERSION,
+    "me.gulya.dagger:dagger-android-processor:" + _VERSION,
+    "me.gulya.dagger:dagger-android-support:" + _VERSION,
+    "me.gulya.dagger:dagger-android:" + _VERSION,
 ]
 
 HILT_ANDROID_ARTIFACTS = [
     "androidx.test:core:1.1.0",  # Export for ApplicationProvider
     "javax.annotation:javax.annotation-api:1.3.2",  # Export for @Generated
     "androidx.annotation:annotation:1.1.0",  # Export for @CallSuper/@Nullable
-    "com.google.dagger:dagger:" + _VERSION,
-    "com.google.dagger:dagger-compiler:" + _VERSION,
-    "com.google.dagger:hilt-android:" + _VERSION,
-    "com.google.dagger:hilt-android-testing:" + _VERSION,
-    "com.google.dagger:hilt-android-compiler:" + _VERSION,
-    "com.google.dagger:hilt-core:" + _VERSION,
+    "me.gulya.dagger:dagger:" + _VERSION,
+    "me.gulya.dagger:dagger-compiler:" + _VERSION,
+    "me.gulya.dagger:hilt-android:" + _VERSION,
+    "me.gulya.dagger:hilt-android-testing:" + _VERSION,
+    "me.gulya.dagger:hilt-android-compiler:" + _VERSION,
+    "me.gulya.dagger:hilt-core:" + _VERSION,
 ]
 
 DAGGER_REPOSITORIES = [
     "https://maven.google.com",
     "https://repo1.maven.org/maven2",
-    "https://oss.sonatype.org/content/repositories/snapshots",
+    "https://central.sonatype.com/repository/maven-snapshots",
 ]
 
 DAGGER_ANDROID_REPOSITORIES = DAGGER_REPOSITORIES

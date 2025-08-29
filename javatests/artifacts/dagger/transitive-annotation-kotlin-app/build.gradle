@@ -31,8 +31,8 @@ kapt {
 
 dependencies {
   implementation project(":transitive-annotation-kotlin-app:library1")
-  implementation "com.google.dagger:dagger:$dagger_version"
-  kapt "com.google.dagger:dagger-compiler:$dagger_version"
+  implementation "me.gulya.dagger:dagger:$dagger_version"
+  kapt "me.gulya.dagger:dagger-compiler:$dagger_version"
 
   testImplementation "junit:junit:$junit_version"
   testImplementation "com.google.truth:truth:$truth_version"

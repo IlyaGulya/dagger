@@ -38,7 +38,7 @@ filegroup(
 
 java_library(
     name = "artifact-lib",
-    tags = ["maven_coordinates=com.google.dagger:hilt-core:" + POM_VERSION],
+    tags = ["maven_coordinates=me.gulya.dagger:hilt-core:" + POM_VERSION],
     exports = [
         "//dagger-runtime/main/java/dagger:core",
         "//hilt-core/main/java/dagger/hilt:define_component",
@@ -54,7 +54,7 @@ java_library(
 
 gen_maven_artifact(
     name = "artifact",
-    artifact_coordinates = "com.google.dagger:hilt-core:" + POM_VERSION,
+    artifact_coordinates = "me.gulya.dagger:hilt-core:" + POM_VERSION,
     artifact_name = "Hilt Core",
     artifact_target = ":artifact-lib",
     artifact_target_libs = [
@@ -82,7 +82,7 @@ gen_maven_artifact(
     ],
     artifact_target_maven_deps = [
         "com.google.code.findbugs:jsr305",
-        "com.google.dagger:dagger",
+        "me.gulya.dagger:dagger",
         "javax.inject:javax.inject",
     ],
     artifact_target_maven_deps_banned = [

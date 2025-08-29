@@ -15,7 +15,7 @@ package_group(
 # relies on the shaded classes (e.g. auto-common) included with the dagger-spi artifact.
 java_library(
     name = "artifact-lib",
-    tags = ["maven_coordinates=com.google.dagger:dagger-grpc-server-processor:" + POM_VERSION],
+    tags = ["maven_coordinates=me.gulya.dagger:dagger-grpc-server-processor:" + POM_VERSION],
     exports = [
         "//dagger-grpc-server-processor/main/java/dagger/grpc/server/processor",
         "//dagger-spi",
@@ -24,16 +24,16 @@ java_library(
 
 gen_maven_artifact(
     name = "artifact",
-    artifact_coordinates = "com.google.dagger:dagger-grpc-server-processor:" + POM_VERSION,
+    artifact_coordinates = "me.gulya.dagger:dagger-grpc-server-processor:" + POM_VERSION,
     artifact_name = "Dagger gRPC Server Processor",
     artifact_target = ":artifact-lib",
     artifact_target_libs = [
         "//dagger-grpc-server-processor/main/java/dagger/grpc/server/processor",
     ],
     artifact_target_maven_deps = [
-        "com.google.dagger:dagger",
-        "com.google.dagger:dagger-grpc-server-annotations",
-        "com.google.dagger:dagger-spi",
+        "me.gulya.dagger:dagger",
+        "me.gulya.dagger:dagger-grpc-server-annotations",
+        "me.gulya.dagger:dagger-spi",
         "com.google.googlejavaformat:google-java-format",
         "com.google.guava:failureaccess",
         "com.google.guava:guava",

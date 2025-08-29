@@ -276,7 +276,7 @@ class HiltGradlePlugin @Inject constructor(private val providers: ProviderFactor
         }
         config.extendsFrom(*apConfigurations.toTypedArray())
         // Add hilt-compiler even though it might be in the AP configurations already.
-        project.dependencies.add(config.name, "com.google.dagger:hilt-compiler:$HILT_VERSION")
+        project.dependencies.add(config.name, "me.gulya.dagger:hilt-compiler:$HILT_VERSION")
       }
 
     fun getInputClasspath(artifactAttributeValue: String) =

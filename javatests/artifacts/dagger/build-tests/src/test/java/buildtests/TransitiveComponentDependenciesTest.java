@@ -104,8 +104,8 @@ public class TransitiveComponentDependenciesTest {
             "}",
             "dependencies {",
             "  implementation project(':libraryB')",
-            "  implementation \"com.google.dagger:dagger:$dagger_version\"",
-            "  annotationProcessor \"com.google.dagger:dagger-compiler:$dagger_version\"",
+            "  implementation \"me.gulya.dagger:dagger:$dagger_version\"",
+            "  annotationProcessor \"me.gulya.dagger:dagger-compiler:$dagger_version\"",
             "}")
         .addSrcFile(
             "ComponentC.java",
@@ -137,8 +137,8 @@ public class TransitiveComponentDependenciesTest {
             "}",
             "dependencies {",
             transitiveDependencyType + " project(':libraryA')",
-            "  implementation \"com.google.dagger:dagger:$dagger_version\"",
-            "  annotationProcessor \"com.google.dagger:dagger-compiler:$dagger_version\"",
+            "  implementation \"me.gulya.dagger:dagger:$dagger_version\"",
+            "  annotationProcessor \"me.gulya.dagger:dagger-compiler:$dagger_version\"",
             "}")
         .addSrcFile(
             "ComponentB.java",
@@ -169,8 +169,8 @@ public class TransitiveComponentDependenciesTest {
             "  id 'java-library'",
             "}",
             "dependencies {",
-            "  implementation \"com.google.dagger:dagger:$dagger_version\"",
-            "  annotationProcessor \"com.google.dagger:dagger-compiler:$dagger_version\"",
+            "  implementation \"me.gulya.dagger:dagger:$dagger_version\"",
+            "  annotationProcessor \"me.gulya.dagger:dagger-compiler:$dagger_version\"",
             "}")
         .addSrcFile(
             "ComponentA.java",

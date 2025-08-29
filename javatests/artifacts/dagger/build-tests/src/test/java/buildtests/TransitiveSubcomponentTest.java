@@ -71,8 +71,8 @@ public class TransitiveSubcomponentTest {
             "}",
             "dependencies {",
             "  implementation project(':library1')",
-            "  implementation \"com.google.dagger:dagger:$dagger_version\"",
-            "  annotationProcessor \"com.google.dagger:dagger-compiler:$dagger_version\"",
+            "  implementation \"me.gulya.dagger:dagger:$dagger_version\"",
+            "  annotationProcessor \"me.gulya.dagger:dagger-compiler:$dagger_version\"",
             "}")
         .addSrcFile(
             "MyComponent.java",
@@ -93,8 +93,8 @@ public class TransitiveSubcomponentTest {
             "  id 'org.jetbrains.kotlin.kapt' version \"$kotlin_version\"",
             "}",
             "dependencies {",
-            "  implementation \"com.google.dagger:dagger:$dagger_version\"",
-            "  annotationProcessor \"com.google.dagger:dagger-compiler:$dagger_version\"",
+            "  implementation \"me.gulya.dagger:dagger:$dagger_version\"",
+            "  annotationProcessor \"me.gulya.dagger:dagger-compiler:$dagger_version\"",
             "}")
         .addSrcFile(
             "MyModule.kt",

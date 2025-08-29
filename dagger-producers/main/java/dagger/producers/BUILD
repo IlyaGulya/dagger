@@ -39,7 +39,7 @@ java_library(
     name = "producers",
     srcs = SRCS,
     javacopts = JAVA_RELEASE_MIN + DOCLINT_HTML_AND_SYNTAX + DOCLINT_REFERENCES,
-    tags = ["maven_coordinates=com.google.dagger:dagger-producers:" + POM_VERSION],
+    tags = ["maven_coordinates=me.gulya.dagger:dagger-producers:" + POM_VERSION],
     exports = [
         "//third_party/java/guava/base",
         "//third_party/java/guava/util/concurrent",

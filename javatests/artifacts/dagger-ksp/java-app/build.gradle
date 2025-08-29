@@ -21,8 +21,8 @@ plugins {
 }
 
 dependencies {
-  implementation "com.google.dagger:dagger:$dagger_version"
-  ksp "com.google.dagger:dagger-compiler:$dagger_version"
+  implementation "me.gulya.dagger:dagger:$dagger_version"
+  ksp "me.gulya.dagger:dagger-compiler:$dagger_version"
 
   testImplementation 'com.google.truth:truth:1.0.1'
   testImplementation 'junit:junit:4.13'

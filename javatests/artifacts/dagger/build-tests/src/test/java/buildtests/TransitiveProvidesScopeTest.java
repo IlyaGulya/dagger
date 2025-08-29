@@ -110,8 +110,8 @@ public class TransitiveProvidesScopeTest {
             "dependencies {",
             "  implementation project(':library1')",
             "  annotationProcessor project(':spi-plugin')",
-            "  implementation \"com.google.dagger:dagger:$dagger_version\"",
-            "  annotationProcessor \"com.google.dagger:dagger-compiler:$dagger_version\"",
+            "  implementation \"me.gulya.dagger:dagger:$dagger_version\"",
+            "  annotationProcessor \"me.gulya.dagger:dagger-compiler:$dagger_version\"",
             "}")
         .addSrcFile(
             "MyComponent.java",
@@ -133,8 +133,8 @@ public class TransitiveProvidesScopeTest {
             "}",
             "dependencies {",
             transitiveDependencyType + " project(':library2')",
-            "  implementation \"com.google.dagger:dagger:$dagger_version\"",
-            "  annotationProcessor \"com.google.dagger:dagger-compiler:$dagger_version\"",
+            "  implementation \"me.gulya.dagger:dagger:$dagger_version\"",
+            "  annotationProcessor \"me.gulya.dagger:dagger-compiler:$dagger_version\"",
             "}")
         // Note: In order to repro the issue we place MyScope on a subcomponent so that it can be a
         // transitive dependency of the component. If MyScope was placed on directly on the
@@ -193,7 +193,7 @@ public class TransitiveProvidesScopeTest {
             "  id 'java'",
             "}",
             "dependencies {",
-            "  implementation \"com.google.dagger:dagger-spi:$dagger_version\"",
+            "  implementation \"me.gulya.dagger:dagger-spi:$dagger_version\"",
             "  implementation 'com.google.auto.service:auto-service-annotations:1.0.1'",
             "  annotationProcessor 'com.google.auto.service:auto-service:1.0.1'",
             "}")

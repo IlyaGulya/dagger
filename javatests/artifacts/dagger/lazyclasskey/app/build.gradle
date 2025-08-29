@@ -59,6 +59,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
     // Dagger dependencies
-    implementation "com.google.dagger:dagger:$dagger_version"
-    annotationProcessor "com.google.dagger:dagger-compiler:$dagger_version"
+    implementation "me.gulya.dagger:dagger:$dagger_version"
+    annotationProcessor "me.gulya.dagger:dagger-compiler:$dagger_version"
 }

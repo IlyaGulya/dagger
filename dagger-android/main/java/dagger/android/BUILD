@@ -44,7 +44,7 @@ android_library(
     plugins = [
         "//dagger-android-proguard-processor:plugin",
     ],
-    tags = ["maven_coordinates=com.google.dagger:dagger-android:" + POM_VERSION],
+    tags = ["maven_coordinates=me.gulya.dagger:dagger-android:" + POM_VERSION],
     exports = [
         "//dagger-lint:lint-android-artifact-lib",
     ],

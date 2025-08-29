@@ -48,7 +48,7 @@ dependencies {
     implementation project(':deep-android-lib')
     implementation project(':deep-kotlin-lib')
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'com.google.dagger:hilt-android:LOCAL-SNAPSHOT'
-    kaptWithKapt 'com.google.dagger:hilt-compiler:LOCAL-SNAPSHOT'
-    kspWithKsp 'com.google.dagger:hilt-compiler:LOCAL-SNAPSHOT'
+    implementation 'me.gulya.dagger:hilt-android:LOCAL-SNAPSHOT'
+    kaptWithKapt 'me.gulya.dagger:hilt-compiler:LOCAL-SNAPSHOT'
+    kspWithKsp 'me.gulya.dagger:hilt-compiler:LOCAL-SNAPSHOT'
 }

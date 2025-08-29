@@ -22,7 +22,7 @@
     <version>7</version>
   </parent>
 
-  <groupId>com.google.dagger</groupId>
+  <groupId>me.gulya.dagger</groupId>
   <artifactId>{artifact_id}</artifactId>
   <name>{artifact_name}</name>
   <version>{pom_version}</version>
@@ -53,6 +53,13 @@
     <name>Google, Inc.</name>
     <url>https://www.google.com</url>
   </organization>
+
+  <developers>
+    <developer>
+      <organization>Google</organization>
+      <organizationUrl>http://www.google.com</organizationUrl>
+    </developer>
+  </developers>
   <dependencies>
     {generated_bzl_deps}
   </dependencies>

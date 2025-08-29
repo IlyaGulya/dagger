@@ -30,7 +30,7 @@ package_group(
 
 gen_maven_artifact(
     name = "artifact",
-    artifact_coordinates = "com.google.dagger:dagger-android-processor:" + POM_VERSION,
+    artifact_coordinates = "me.gulya.dagger:dagger-android-processor:" + POM_VERSION,
     artifact_name = "Dagger Android Processor",
     artifact_target = "//dagger-android-processor/main/java/dagger/android/processor",
     artifact_target_libs = [
@@ -38,12 +38,12 @@ gen_maven_artifact(
         "//dagger-compiler/main/java/dagger/internal/codegen/xprocessing",
     ],
     artifact_target_maven_deps = [
-        "com.google.dagger:dagger",
+        "me.gulya.dagger:dagger",
         "com.google.devtools.ksp:symbol-processing-api",
         "com.google.guava:guava",
         "com.squareup:javapoet",
         "com.google.code.findbugs:jsr305",
-        "com.google.dagger:dagger-spi",
+        "me.gulya.dagger:dagger-spi",
         "com.google.guava:failureaccess",
         "com.squareup:kotlinpoet",
         "net.ltgt.gradle.incap:incap",

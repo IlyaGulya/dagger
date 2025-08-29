@@ -42,7 +42,7 @@ class PublishConventionPlugin : Plugin<Project> {
         project.extensions.getByName("mavenPublishing") as MavenPublishBaseExtension
       publishExtension.apply {
         coordinates(
-          groupId = "com.google.dagger",
+          groupId = "me.gulya.dagger",
           artifactId = project.name,
           version = project.findProperty("PUBLISH_VERSION").toString(),
         )

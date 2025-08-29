@@ -8,7 +8,7 @@ package(default_visibility = ["//:src"])
 
 java_library(
     name = "artifact-lib",
-    tags = ["maven_coordinates=com.google.dagger:dagger-grpc-server-annotations:" + POM_VERSION],
+    tags = ["maven_coordinates=me.gulya.dagger:dagger-grpc-server-annotations:" + POM_VERSION],
     exports = [
         "//dagger-grpc-server-annotations/main/java/dagger/grpc/server:annotations",
     ],
@@ -16,7 +16,7 @@ java_library(
 
 gen_maven_artifact(
     name = "artifact",
-    artifact_coordinates = "com.google.dagger:dagger-grpc-server-annotations:" + POM_VERSION,
+    artifact_coordinates = "me.gulya.dagger:dagger-grpc-server-annotations:" + POM_VERSION,
     artifact_name = "Dagger gRPC Server Annotations",
     artifact_target = ":artifact-lib",
     artifact_target_libs = [

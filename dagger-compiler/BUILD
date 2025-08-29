@@ -29,7 +29,7 @@ package_group(
 
 gen_maven_artifact(
     name = "artifact",
-    artifact_coordinates = "com.google.dagger:dagger-compiler:" + POM_VERSION,
+    artifact_coordinates = "me.gulya.dagger:dagger-compiler:" + POM_VERSION,
     artifact_name = "Dagger Compiler",
     artifact_target = "//dagger-compiler/main/java/dagger/internal/codegen:processor",
     artifact_target_libs = [
@@ -51,8 +51,8 @@ gen_maven_artifact(
     ],
     artifact_target_maven_deps = [
         "com.google.code.findbugs:jsr305",
-        "com.google.dagger:dagger-spi",
-        "com.google.dagger:dagger",
+        "me.gulya.dagger:dagger-spi",
+        "me.gulya.dagger:dagger",
         "com.google.devtools.ksp:symbol-processing-api",
         "com.google.googlejavaformat:google-java-format",
         "com.google.guava:failureaccess",

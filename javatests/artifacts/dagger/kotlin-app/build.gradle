@@ -31,13 +31,13 @@ dependencies {
   implementation project(path: ':kotlin-app:kotlin-library')
 
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-  implementation "com.google.dagger:dagger:$dagger_version"
-  kapt "com.google.dagger:dagger-compiler:$dagger_version"
+  implementation "me.gulya.dagger:dagger:$dagger_version"
+  kapt "me.gulya.dagger:dagger-compiler:$dagger_version"
 
   // This is testImplementation rather than kaptTest because we're actually
   // testing the reference to ComponentProcessor.
   // See https://github.com/google/dagger/issues/2765
-  testImplementation "com.google.dagger:dagger-compiler:$dagger_version"
+  testImplementation "me.gulya.dagger:dagger-compiler:$dagger_version"
   testImplementation "com.google.truth:truth:$truth_version"
   testImplementation "junit:junit:$junit_version"
 }

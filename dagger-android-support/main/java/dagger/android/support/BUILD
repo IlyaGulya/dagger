@@ -34,7 +34,7 @@ android_library(
     name = "support",
     srcs = glob(["*.java"]),
     javacopts = JAVA_RELEASE_MIN + DOCLINT_HTML_AND_SYNTAX,
-    tags = ["maven_coordinates=com.google.dagger:dagger-android-support:" + POM_VERSION],
+    tags = ["maven_coordinates=me.gulya.dagger:dagger-android-support:" + POM_VERSION],
     deps = [
         "//:dagger_with_compiler",
         "//dagger-android/main/java/dagger/android",

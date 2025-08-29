@@ -111,13 +111,13 @@ _JAVA_DOC_SRCS = [
 
 java_library(
     name = "artifact-lib",
-    tags = ["maven_coordinates=com.google.dagger:hilt-compiler:" + POM_VERSION],
+    tags = ["maven_coordinates=me.gulya.dagger:hilt-compiler:" + POM_VERSION],
     exports = _ARTIFACT_EXPORTS,
 )
 
 gen_maven_artifact(
     name = "artifact",
-    artifact_coordinates = "com.google.dagger:hilt-compiler:" + POM_VERSION,
+    artifact_coordinates = "me.gulya.dagger:hilt-compiler:" + POM_VERSION,
     artifact_name = "Hilt Processor",
     artifact_target = ":artifact-lib",
     artifact_target_libs = _ARTIFACT_TARGET_LIBS,
@@ -129,7 +129,7 @@ gen_maven_artifact(
 
 java_library(
     name = "legacy-artifact-lib",
-    tags = ["maven_coordinates=com.google.dagger:hilt-android-compiler:" + POM_VERSION],
+    tags = ["maven_coordinates=me.gulya.dagger:hilt-android-compiler:" + POM_VERSION],
     exports = _ARTIFACT_EXPORTS,
 )
 
@@ -137,7 +137,7 @@ java_library(
 # plan to create a non-android Hilt which will share the same compiler artifact as Hilt android.
 gen_maven_artifact(
     name = "legacy-artifact",
-    artifact_coordinates = "com.google.dagger:hilt-android-compiler:" + POM_VERSION,
+    artifact_coordinates = "me.gulya.dagger:hilt-android-compiler:" + POM_VERSION,
     artifact_name = "Hilt Android Processor",
     artifact_target = ":legacy-artifact-lib",
     artifact_target_libs = _ARTIFACT_TARGET_LIBS,

@@ -84,8 +84,8 @@ public class TransitiveMapKeyTest {
             "}",
             "dependencies {",
             "  implementation project(':library1')",
-            "  implementation \"com.google.dagger:dagger:$dagger_version\"",
-            "  annotationProcessor \"com.google.dagger:dagger-compiler:$dagger_version\"",
+            "  implementation \"me.gulya.dagger:dagger:$dagger_version\"",
+            "  annotationProcessor \"me.gulya.dagger:dagger-compiler:$dagger_version\"",
             "}")
         .addSrcFile(
             "MyComponent.java",
@@ -108,8 +108,8 @@ public class TransitiveMapKeyTest {
             "}",
             "dependencies {",
             dependencyType + " project(':library2')",
-            "  implementation \"com.google.dagger:dagger:$dagger_version\"",
-            "  annotationProcessor \"com.google.dagger:dagger-compiler:$dagger_version\"",
+            "  implementation \"me.gulya.dagger:dagger:$dagger_version\"",
+            "  annotationProcessor \"me.gulya.dagger:dagger-compiler:$dagger_version\"",
             "}")
         .addSrcFile(
             "MyModule.java",
@@ -137,8 +137,8 @@ public class TransitiveMapKeyTest {
             "  id 'java-library'",
             "}",
             "dependencies {",
-            "  implementation \"com.google.dagger:dagger:$dagger_version\"",
-            "  annotationProcessor \"com.google.dagger:dagger-compiler:$dagger_version\"",
+            "  implementation \"me.gulya.dagger:dagger:$dagger_version\"",
+            "  annotationProcessor \"me.gulya.dagger:dagger-compiler:$dagger_version\"",
             "}")
         .addSrcFile(
             "MyMapKey.java",

@@ -9,6 +9,6 @@ kotlin {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation "com.google.dagger:hilt-core:LOCAL-SNAPSHOT"
-    ksp "com.google.dagger:hilt-compiler:LOCAL-SNAPSHOT"
+    implementation "me.gulya.dagger:hilt-core:LOCAL-SNAPSHOT"
+    ksp "me.gulya.dagger:hilt-compiler:LOCAL-SNAPSHOT"
 }

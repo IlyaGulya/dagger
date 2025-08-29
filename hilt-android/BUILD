@@ -43,7 +43,7 @@ filegroup(
 
 android_library(
     name = "artifact-lib",
-    tags = ["maven_coordinates=com.google.dagger:hilt-android:" + POM_VERSION],
+    tags = ["maven_coordinates=me.gulya.dagger:hilt-android:" + POM_VERSION],
     exports = [
         "//dagger-lint:lint-android-artifact-lib",
         "//hilt-android/main/java/dagger/hilt/android:android_entry_point",
@@ -60,7 +60,7 @@ android_library(
 
 gen_maven_artifact(
     name = "artifact",
-    artifact_coordinates = "com.google.dagger:hilt-android:" + POM_VERSION,
+    artifact_coordinates = "me.gulya.dagger:hilt-android:" + POM_VERSION,
     artifact_name = "Hilt Android",
     artifact_target = ":artifact-lib",
     artifact_target_libs = [
@@ -116,9 +116,9 @@ gen_maven_artifact(
         "androidx.lifecycle:lifecycle-viewmodel-savedstate:aar",
         "androidx.savedstate:savedstate:aar",
         "com.google.code.findbugs:jsr305",
-        "com.google.dagger:dagger-lint-aar",
-        "com.google.dagger:dagger",
-        "com.google.dagger:hilt-core",
+        "me.gulya.dagger:dagger-lint-aar",
+        "me.gulya.dagger:dagger",
+        "me.gulya.dagger:hilt-core",
         "javax.inject:javax.inject",
         "org.jetbrains.kotlin:kotlin-stdlib",
     ],

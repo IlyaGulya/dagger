@@ -56,8 +56,8 @@ configurations.all {
 }
 
 dependencies {
-  implementation "com.google.dagger:hilt-android:$dagger_version"
-  annotationProcessor "com.google.dagger:hilt-compiler:$dagger_version"
+  implementation "me.gulya.dagger:hilt-android:$dagger_version"
+  annotationProcessor "me.gulya.dagger:hilt-compiler:$dagger_version"
 
   testImplementation 'com.google.truth:truth:1.0.1'
   testImplementation 'junit:junit:4.13'

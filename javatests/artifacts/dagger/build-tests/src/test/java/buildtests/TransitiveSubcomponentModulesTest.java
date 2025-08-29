@@ -156,8 +156,8 @@ public class TransitiveSubcomponentModulesTest {
             "}",
             "dependencies {",
             "  implementation project(':library1')",
-            "  implementation \"com.google.dagger:dagger:$dagger_version\"",
-            "  annotationProcessor \"com.google.dagger:dagger-compiler:$dagger_version\"",
+            "  implementation \"me.gulya.dagger:dagger:$dagger_version\"",
+            "  annotationProcessor \"me.gulya.dagger:dagger-compiler:$dagger_version\"",
             "}")
         .addSrcFile(
             "MyComponent.java",
@@ -179,8 +179,8 @@ public class TransitiveSubcomponentModulesTest {
             "}",
             "dependencies {",
             transitiveDependencyType + " project(':library2')",
-            "  implementation \"com.google.dagger:dagger:$dagger_version\"",
-            "  annotationProcessor \"com.google.dagger:dagger-compiler:$dagger_version\"",
+            "  implementation \"me.gulya.dagger:dagger:$dagger_version\"",
+            "  annotationProcessor \"me.gulya.dagger:dagger-compiler:$dagger_version\"",
             "}")
         .addSrcFile(
             "IncludesTransitiveModule.java",
@@ -201,8 +201,8 @@ public class TransitiveSubcomponentModulesTest {
             "  id 'java-library'",
             "}",
             "dependencies {",
-            "  implementation \"com.google.dagger:dagger:$dagger_version\"",
-            "  annotationProcessor \"com.google.dagger:dagger-compiler:$dagger_version\"",
+            "  implementation \"me.gulya.dagger:dagger:$dagger_version\"",
+            "  annotationProcessor \"me.gulya.dagger:dagger-compiler:$dagger_version\"",
             "}")
         .addSrcFile(
             "TransitiveModule.java",

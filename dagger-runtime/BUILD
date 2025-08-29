@@ -22,7 +22,7 @@ package(default_visibility = ["//:src"])
 
 gen_maven_artifact(
     name = "artifact",
-    artifact_coordinates = "com.google.dagger:dagger:" + POM_VERSION,
+    artifact_coordinates = "me.gulya.dagger:dagger:" + POM_VERSION,
     artifact_name = "Dagger",
     artifact_target = "//dagger-runtime/main/java/dagger:core",
     artifact_target_maven_deps = [

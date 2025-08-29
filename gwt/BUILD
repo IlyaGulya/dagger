@@ -26,7 +26,7 @@ java_library(
     javacopts = JAVA_RELEASE_MIN,
     resource_strip_prefix = "gwt/",
     resources = glob(["**/*.gwt.xml"]),
-    tags = ["maven_coordinates=com.google.dagger:dagger-gwt:" + POM_VERSION],
+    tags = ["maven_coordinates=me.gulya:dagger-gwt:" + POM_VERSION],
     exports = [
         ":manual_deps",
         "//dagger-runtime/main/java/dagger:core",
@@ -36,7 +36,7 @@ java_library(
 java_library(
     name = "manual_deps",
     tags = [
-        "maven_coordinates=com.google.dagger:dagger:%s:jar:sources" % POM_VERSION,
+        "maven_coordinates=me.gulya.dagger:dagger:%s:jar:sources" % POM_VERSION,
         "maven_coordinates=jakarta.inject:jakarta.inject-api:2.0.1:jar:sources",
         "maven_coordinates=javax.inject:javax.inject:1:jar:sources",
         "maven_coordinates=org.jspecify:jspecify:1.0.0:jar:sources",

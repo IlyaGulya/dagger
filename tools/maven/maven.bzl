@@ -31,6 +31,7 @@ def dagger_pom_file(name, targets, artifact_name, artifact_id, packaging = None,
         name = name,
         targets = targets,
         preferred_group_ids = [
+            "me.gulya.dagger",
             "com.google.dagger",
             "com.google",
         ],

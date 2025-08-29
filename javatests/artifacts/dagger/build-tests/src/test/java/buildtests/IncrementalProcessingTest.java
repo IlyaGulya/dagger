@@ -68,8 +68,8 @@ public class IncrementalProcessingTest {
                 "}",
                 "dependencies {",
                 "  implementation \"org.jetbrains.kotlin:kotlin-stdlib\"",
-                "  implementation \"com.google.dagger:dagger:$dagger_version\"",
-                "  ksp \"com.google.dagger:dagger-compiler:$dagger_version\"",
+                "  implementation \"me.gulya.dagger:dagger:$dagger_version\"",
+                "  ksp \"me.gulya.dagger:dagger-compiler:$dagger_version\"",
                 "}")
             // Note: both A and AFactory need to be in the same source file for this to test the
             // regression in https://github.com/google/dagger/issues/4054.

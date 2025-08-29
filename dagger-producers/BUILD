@@ -22,11 +22,11 @@ package(default_visibility = ["//:src"])
 
 gen_maven_artifact(
     name = "artifact",
-    artifact_coordinates = "com.google.dagger:dagger-producers:" + POM_VERSION,
+    artifact_coordinates = "me.gulya.dagger:dagger-producers:" + POM_VERSION,
     artifact_name = "Dagger Producers",
     artifact_target = "//dagger-producers/main/java/dagger/producers",
     artifact_target_maven_deps = [
-        "com.google.dagger:dagger",
+        "me.gulya.dagger:dagger",
         "com.google.guava:failureaccess",
         "com.google.guava:guava",  # TODO(bcorso): Remove guava dependency and ban it?
         "javax.inject:javax.inject",

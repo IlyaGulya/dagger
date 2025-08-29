@@ -112,8 +112,8 @@ public class TransitiveProvidesParameterizedTypeTest {
             "dependencies {",
             "  implementation project(':library1')",
             "  annotationProcessor project(':spi-plugin')",
-            "  implementation \"com.google.dagger:dagger:$dagger_version\"",
-            "  annotationProcessor \"com.google.dagger:dagger-compiler:$dagger_version\"",
+            "  implementation \"me.gulya.dagger:dagger:$dagger_version\"",
+            "  annotationProcessor \"me.gulya.dagger:dagger-compiler:$dagger_version\"",
             "}")
         .addSrcFile(
             "MyComponent.java",
@@ -135,8 +135,8 @@ public class TransitiveProvidesParameterizedTypeTest {
             "}",
             "dependencies {",
             transitiveDependencyType + " project(':library2')",
-            "  implementation \"com.google.dagger:dagger:$dagger_version\"",
-            "  annotationProcessor \"com.google.dagger:dagger-compiler:$dagger_version\"",
+            "  implementation \"me.gulya.dagger:dagger:$dagger_version\"",
+            "  annotationProcessor \"me.gulya.dagger:dagger-compiler:$dagger_version\"",
             "}")
         .addSrcFile(
             "MyModule.java",
@@ -181,7 +181,7 @@ public class TransitiveProvidesParameterizedTypeTest {
             "  id 'java'",
             "}",
             "dependencies {",
-            "  implementation \"com.google.dagger:dagger-spi:$dagger_version\"",
+            "  implementation \"me.gulya.dagger:dagger-spi:$dagger_version\"",
             "  implementation 'com.google.auto.service:auto-service-annotations:1.0.1'",
             "  annotationProcessor 'com.google.auto.service:auto-service:1.0.1'",
             "}")

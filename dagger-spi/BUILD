@@ -28,7 +28,7 @@ package_group(
     ],
 )
 
-ARTIFACT_COORDINATES = "com.google.dagger:dagger-spi:" + POM_VERSION
+ARTIFACT_COORDINATES = "me.gulya:dagger-spi:" + POM_VERSION
 
 ARTIFACT_LIBS = [
     "//dagger-spi/main/java/dagger/internal/codegen/extension",
@@ -62,7 +62,7 @@ gen_maven_artifact(
     artifact_target_libs = ARTIFACT_LIBS,
     artifact_target_maven_deps = [
         "com.google.code.findbugs:jsr305",
-        "com.google.dagger:dagger",
+        "me.gulya.dagger:dagger",
         "com.google.devtools.ksp:symbol-processing-api",
         "com.google.guava:failureaccess",
         "com.google.guava:guava",

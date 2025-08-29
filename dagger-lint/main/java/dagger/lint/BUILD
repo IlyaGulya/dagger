@@ -23,7 +23,7 @@ package(default_visibility = ["//:src"])
 kt_jvm_library(
     name = "lint-artifact-lib",
     srcs = glob(["*.kt"]),
-    tags = ["maven_coordinates=com.google.dagger:dagger-lint:" + POM_VERSION],
+    tags = ["maven_coordinates=me.gulya.dagger:dagger-lint:" + POM_VERSION],
     deps = [
         "//third_party/java/auto:service",
         "@maven//:com_android_tools_external_com_intellij_intellij_core",
